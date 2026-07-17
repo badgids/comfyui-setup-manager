@@ -1,0 +1,66 @@
+[project]
+name = "comfyui-setup-manager"
+version = "0.8.7"
+description = "Standalone cross-platform manager and automation CLI for ComfyUI installations, portable setups, plugins, workflows, updates, and wheels."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Alan Guice (Badgids)" },
+]
+license = "Apache-2.0"
+keywords = ["ComfyUI", "AI", "workflow", "installer", "Textual", "CLI", "automation"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Installation/Setup",
+]
+dependencies = [
+  "uv>=0.8,<1",
+  "packaging>=24.2,<27",
+  "platformdirs>=4.3,<5",
+  "pyyaml>=6.0,<7",
+  "rich>=14,<16",
+  "textual>=8.2,<9",
+  "tomli>=2,<3; python_version < '3.11'",
+]
+
+[project.urls]
+Homepage = "https://github.com/badgids/comfyui-setup-manager"
+Repository = "https://github.com/badgids/comfyui-setup-manager"
+Issues = "https://github.com/badgids/comfyui-setup-manager/issues"
+Documentation = "https://github.com/badgids/comfyui-setup-manager/tree/main/docs"
+
+[project.scripts]
+comfyui-setup-manager = "comfy_setup.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+comfy_setup = ["profiles/*.yaml", "styles.tcss", "config/*.yaml", "skills/*/SKILL.md"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["../tests"]
+addopts = "-ra"
+markers = [
+  "smoke: fast end-to-end command and packaging smoke tests",
+  "integration: temporary-repository and process integration tests",
+  "network: opt-in tests that require public network access",
+]

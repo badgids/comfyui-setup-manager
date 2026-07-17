@@ -1,0 +1,26 @@
+schema_version: 1
+ui:
+  default_theme: gruvbox
+  terminal_poll_interval_ms: 200
+  terminal_max_visible_lines: 10000
+resolver:
+  prefer_precompiled_wheels: true
+  allow_source_builds: true
+  prompt_when_no_wheel: true
+  verify_wheel_tags: true
+  verify_import_after_install: true
+  merge_new_default_sources: true
+security:
+  remote_sources_require_https: true
+  block_private_package_hosts: true
+  allow_labels:
+  - Official
+  - 3rd Party
+  - Custom/Local
+backups:
+  register_saved_wheels_as_local_sources: true
+  metadata_format: yaml
+logs:
+  auto_cleanup: true
+  retention_mode: monthly
+  retention_days: 30

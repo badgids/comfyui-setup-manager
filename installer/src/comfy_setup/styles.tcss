@@ -1,0 +1,1439 @@
+Screen {
+    background: $background;
+    color: $foreground;
+}
+
+Header {
+    background: $footer-background;
+    color: $foreground;
+    height: 1;
+}
+
+Footer {
+    background: $footer-background;
+    color: $foreground-muted;
+    height: 1;
+}
+
+#wizard {
+    width: 100%;
+    height: 1fr;
+    padding: 0 1;
+    scrollbar-size: 1 1;
+}
+
+.screen-heading {
+    width: 100%;
+    height: auto;
+    min-height: 2;
+    padding: 0 1;
+    margin: 0 0 1 0;
+    border-bottom: solid $border;
+}
+
+.screen-title {
+    color: $primary;
+    text-style: bold;
+    width: 100%;
+    height: 1;
+}
+
+.screen-subtitle {
+    color: $foreground-muted;
+    width: 100%;
+    height: auto;
+    max-height: 2;
+}
+
+.card {
+    background: $panel;
+    border: round $border;
+    padding: 1;
+    margin: 0 0 1 0;
+    width: 100%;
+    height: auto;
+}
+
+.card-title,
+.section-label {
+    text-style: bold;
+    color: $primary;
+    margin: 0 0 1 0;
+    height: 1;
+}
+
+.help-text {
+    color: $foreground-muted;
+    height: auto;
+    margin: 0;
+}
+
+.status-good {
+    color: $success;
+}
+
+.status-warn {
+    color: $warning;
+}
+
+.status-error {
+    color: $error;
+}
+
+.button-row {
+    width: 100%;
+    height: 3;
+    align-horizontal: right;
+    margin: 1 0 0 0;
+}
+
+Button {
+    height: 3;
+    min-width: 0;
+    width: auto;
+    margin: 0 0 0 1;
+    background: $surface;
+    color: $foreground;
+    border: tall $border;
+}
+
+Button:hover,
+Button:focus {
+    border: tall $accent;
+    background: $panel;
+}
+
+Button.primary {
+    background: $primary;
+    color: $button-color-foreground;
+    border: tall $primary;
+    text-style: bold;
+}
+
+Button.success {
+    background: $success;
+    color: $button-color-foreground;
+    border: tall $success;
+}
+
+Button.danger {
+    background: $error;
+    color: $button-color-foreground;
+    border: tall $error;
+}
+
+Button.small-action {
+    width: auto;
+    min-width: 11;
+    margin: 1 0 0 0;
+}
+
+Input {
+    width: 100%;
+    height: 3;
+    margin: 0 0 1 0;
+    background: $surface;
+    color: $foreground;
+    border: tall $border;
+}
+
+Input:focus {
+    border: tall $accent;
+}
+
+/*
+ * Textual Select owns its visible border through the internal SelectCurrent
+ * widget. Styling the outer Select with another fixed-height border clips the
+ * selected label in real terminals. Keep the outer widget borderless and
+ * style the actual current-value control instead.
+ */
+Select {
+    width: 100%;
+    height: auto;
+    margin: 0 0 1 0;
+    color: $foreground;
+    background: transparent;
+    border: none;
+}
+
+Select > SelectCurrent {
+    width: 100%;
+    height: 3;
+    padding: 0 1;
+    color: $foreground;
+    background: $surface;
+    border: tall $border;
+}
+
+Select > SelectCurrent.-has-value Static#label {
+    color: $foreground;
+}
+
+Select:focus > SelectCurrent {
+    border: tall $accent;
+    background: $surface;
+}
+
+Select > SelectOverlay {
+    color: $foreground;
+    background: $surface;
+    border: tall $accent;
+}
+
+Checkbox {
+    width: 100%;
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+Label {
+    margin: 0 0 0 0;
+    color: $foreground;
+}
+
+.component {
+    padding: 1;
+    margin: 0 0 1 0;
+    background: $surface;
+    border-left: thick $border;
+}
+
+.component-supported {
+    border-left: thick $success;
+}
+
+.component-disabled {
+    color: $foreground-muted;
+    border-left: thick $border;
+}
+
+#system-summary {
+    height: auto;
+}
+
+
+#review-scroll,
+#installation-overview-scroll {
+    width: 100%;
+    height: 1fr;
+    min-height: 8;
+    background: $panel;
+    border: round $border;
+    scrollbar-size: 1 1;
+    scrollbar-gutter: stable;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+#review-markdown {
+    width: 100%;
+    height: 1fr;
+    min-height: 12;
+    padding: 1;
+}
+
+#install-log {
+    height: 1fr;
+    background: $background;
+    border: round $border;
+    padding: 1;
+}
+
+#install-progress {
+    margin: 1 0;
+}
+
+#install-status {
+    color: $primary;
+    text-style: bold;
+}
+
+.builder-result {
+    background: $surface;
+    border: round $border;
+    padding: 1;
+    margin: 1 0 0 0;
+    height: auto;
+}
+
+.centered {
+    align: center middle;
+}
+
+.warning-box {
+    background: $surface;
+    border: round $warning;
+    padding: 1;
+    margin: 1 0 0 0;
+}
+
+.success-box {
+    background: $surface;
+    border: round $success;
+    padding: 1;
+    margin: 1 0 0 0;
+}
+
+.error-box {
+    background: $surface;
+    border: round $error;
+    padding: 1;
+    margin: 1 0 0 0;
+}
+
+TabbedContent {
+    height: 1fr;
+}
+
+TabPane {
+    padding: 1;
+}
+
+/* Home dashboard */
+
+#home-layout {
+    width: 100%;
+    height: 1fr;
+}
+
+#setup-layout {
+    layout: vertical;
+    width: 100%;
+    height: 1fr;
+    min-height: 0;
+    padding: 0;
+}
+
+HomeScreen #wizard {
+    width: 100%;
+    height: 1fr;
+    min-height: 0;
+}
+
+HomeScreen .home-wizard {
+    padding: 0 1;
+}
+
+.dashboard-grid {
+    layout: grid;
+    grid-size: 3;
+    grid-columns: 0.85fr 1.15fr 1.15fr;
+    grid-gutter: 1 1;
+    width: 100%;
+    height: auto;
+}
+
+.dashboard-card {
+    height: auto;
+    min-height: 10;
+    margin: 0;
+}
+
+.quick-actions-card {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 1 0 0 0;
+    width: 100%;
+    height: 3;
+}
+
+.quick-actions-grid {
+    layout: grid;
+    grid-size: 4;
+    grid-columns: 1fr 1fr 1fr 1fr;
+    grid-gutter: 0 1;
+    width: 100%;
+    height: 3;
+}
+
+.quick-actions-grid Button {
+    width: 100%;
+    margin: 0;
+}
+
+.home-actionbar {
+    layout: horizontal;
+    width: 100%;
+    height: 3;
+    min-height: 3;
+    padding: 0 1;
+    margin: 0;
+    background: $panel;
+    border-top: solid $primary;
+    align-vertical: middle;
+}
+
+#home-status {
+    width: 1fr;
+    height: auto;
+    padding: 1 1 0 0;
+}
+
+.continue-button {
+    width: 18;
+    margin: 0;
+}
+
+/* Theme screen */
+
+.theme-card {
+    max-width: 110;
+}
+
+.theme-preview {
+    layout: grid;
+    grid-size: 5;
+    grid-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gutter: 0 1;
+    width: 100%;
+    height: 3;
+    margin: 1 0 0 0;
+}
+
+.theme-preview Static {
+    height: 3;
+    content-align: center middle;
+    text-style: bold;
+}
+
+.preview-primary {
+    background: $primary;
+    color: $button-color-foreground;
+}
+
+.preview-accent {
+    background: $accent;
+    color: $button-color-foreground;
+}
+
+.preview-success {
+    background: $success;
+    color: $button-color-foreground;
+}
+
+.preview-warning {
+    background: $warning;
+    color: $button-color-foreground;
+}
+
+.preview-error {
+    background: $error;
+    color: $button-color-foreground;
+}
+
+.compact-buttons Button {
+    min-width: 17;
+}
+
+.screen-actions {
+    max-width: 110;
+}
+
+/* Other multi-action panels */
+
+.workflow-action-grid {
+    layout: grid;
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    grid-gutter: 1 1;
+    width: 100%;
+    height: auto;
+}
+
+.workflow-action-grid Button {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+.workflow-actions-card {
+    height: auto;
+}
+
+/* Width breakpoints */
+
+HomeScreen.-medium .dashboard-grid {
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+}
+
+HomeScreen.-medium .quick-actions-card {
+    height: 7;
+}
+
+HomeScreen.-medium .quick-actions-grid {
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    height: 7;
+    grid-gutter: 1 1;
+}
+
+HomeScreen.-compact .dashboard-grid {
+    grid-size: 1;
+    grid-columns: 1fr;
+}
+
+HomeScreen.-compact .dashboard-card {
+    min-height: 0;
+}
+
+HomeScreen.-compact .quick-actions-card {
+    height: 15;
+}
+
+HomeScreen.-compact .quick-actions-grid {
+    grid-size: 1;
+    grid-columns: 1fr;
+    height: 15;
+    grid-gutter: 1 1;
+}
+
+HomeScreen.-compact .home-actionbar {
+    height: 7;
+    layout: vertical;
+    padding: 0 1 1 1;
+}
+
+HomeScreen.-compact #home-status {
+    width: 100%;
+    height: 3;
+    padding: 1 0 0 0;
+}
+
+HomeScreen.-compact .continue-button {
+    width: 100%;
+}
+
+HomeScreen.-short .screen-subtitle,
+HomeScreen.-short .compact-detail {
+    display: none;
+}
+
+HomeScreen.-short .dashboard-card {
+    min-height: 7;
+}
+
+HomeScreen.-short .quick-actions-card {
+    margin-top: 0;
+}
+
+ThemeScreen.-compact .theme-preview {
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    height: 7;
+    grid-gutter: 1 1;
+}
+
+/* v0.7 component rows: render labels independently from Checkbox internals so
+   profile names never disappear under terminal/theme combinations. */
+.component {
+    layout: horizontal;
+    width: 100%;
+    height: auto;
+    min-height: 5;
+    padding: 1;
+    margin: 0 0 1 0;
+    background: $surface;
+    border-left: thick $border;
+}
+
+.component-toggle {
+    width: 8;
+    min-width: 8;
+    height: 3;
+    margin: 0 1 0 0;
+}
+
+.component-copy {
+    width: 1fr;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.component-name {
+    width: 100%;
+    height: 1;
+    color: $foreground;
+    text-style: bold;
+}
+
+.component-description,
+.component-source {
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.component-source {
+    color: $foreground-muted;
+}
+
+/* Embedded install/recovery console */
+#installation-layout {
+    width: 100%;
+    height: 1fr;
+    padding: 0 1;
+}
+
+#installation-layout .screen-heading {
+    height: auto;
+    min-height: 3;
+    margin: 0;
+}
+
+#installation-layout #install-progress {
+    margin: 0 0 1 0;
+}
+
+.embedded-terminal {
+    width: 100%;
+    height: 1fr;
+    min-height: 12;
+    background: $background;
+    border: round $border;
+    padding: 0 1;
+}
+
+.console-input-row {
+    width: 100%;
+    height: 3;
+    margin: 1 0 0 0;
+}
+
+.console-input-row Input {
+    width: 1fr;
+    margin: 0 1 0 0;
+}
+
+.console-input-row Button {
+    width: auto;
+    min-width: 10;
+    margin: 0 0 0 1;
+}
+
+.shell-prompt {
+    width: 3;
+    height: 3;
+    content-align: center middle;
+    color: $primary;
+    text-style: bold;
+}
+
+.prompt-panel {
+    width: 100%;
+    height: auto;
+    padding: 1;
+    margin: 1 0 0 0;
+    background: $panel;
+    border: round $warning;
+}
+
+#install-actions {
+    width: 100%;
+    height: 3;
+    margin: 1 0 0 0;
+}
+
+.hidden {
+    display: none;
+}
+
+InstallationScreen.-compact .console-input-row {
+    height: auto;
+    layout: vertical;
+}
+
+InstallationScreen.-compact .console-input-row Input,
+InstallationScreen.-compact .console-input-row Button {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+/* v0.8 application shell and instance manager */
+#main-tabs {
+    width: 100%;
+    height: 1fr;
+}
+
+#main-tabs > ContentSwitcher {
+    height: 1fr;
+}
+
+#main-tabs TabPane {
+    padding: 0;
+    height: 1fr;
+}
+
+.tab-shell {
+    width: 100%;
+    height: 1fr;
+    min-height: 0;
+    padding: 1;
+}
+
+#setup-layout {
+    width: 100%;
+    height: 1fr;
+    min-height: 0;
+    padding: 0;
+}
+
+.manager-toolbar {
+    width: 100%;
+    height: 3;
+    margin: 0 0 1 0;
+}
+
+.manager-toolbar Select {
+    width: 1fr;
+    margin: 0 1 0 0;
+}
+
+.manager-toolbar Button {
+    min-width: 12;
+    margin: 0 0 0 1;
+}
+
+#manager-content {
+    width: 100%;
+    height: 1fr;
+}
+
+.manager-grid {
+    layout: grid;
+    grid-size: 2;
+    grid-columns: 1.25fr 0.75fr;
+    grid-gutter: 1 1;
+    width: 100%;
+    height: auto;
+}
+
+.manager-summary-card,
+.manager-inventory-card {
+    min-height: 10;
+    margin: 0;
+}
+
+.instance-title {
+    color: $primary;
+    text-style: bold;
+    height: 1;
+    margin-bottom: 1;
+}
+
+.path-text {
+    color: $foreground-muted;
+    height: auto;
+    margin-top: 1;
+}
+
+.manager-actions-grid {
+    layout: grid;
+    grid-size: 7;
+    grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gutter: 0 1;
+    width: 100%;
+    height: 3;
+    margin: 1 0 0 0;
+}
+
+.manager-actions-grid Button {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+.manager-status {
+    width: 100%;
+    height: auto;
+    min-height: 2;
+    padding: 1 0 0 0;
+}
+
+.empty-state {
+    width: 100%;
+    height: 1fr;
+    content-align: center middle;
+    color: $foreground-muted;
+    border: round $border;
+}
+
+.compact-form {
+    max-width: 100;
+}
+
+#installation-overview-markdown {
+    width: 100%;
+    height: 1fr;
+    min-height: 12;
+    padding: 1;
+}
+
+HomeScreen.-medium .manager-actions-grid {
+    grid-size: 4;
+    grid-columns: 1fr 1fr 1fr 1fr;
+    grid-gutter: 1 1;
+    height: 7;
+}
+
+HomeScreen.-compact .manager-grid {
+    grid-size: 1;
+    grid-columns: 1fr;
+}
+
+HomeScreen.-compact .manager-toolbar {
+    height: 11;
+    layout: vertical;
+}
+
+HomeScreen.-compact .manager-toolbar Select,
+HomeScreen.-compact .manager-toolbar Button {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+HomeScreen.-compact .manager-actions-grid {
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    grid-gutter: 1 1;
+    height: 11;
+}
+
+.manager-log-card {
+    width: 100%;
+    height: 1fr;
+    min-height: 7;
+    margin: 1 0 0 0;
+}
+
+#manager-log-preview {
+    width: 100%;
+    height: 1fr;
+    min-height: 4;
+    background: $background;
+    border: none;
+    padding: 0 1;
+}
+
+
+/* Update and snapshot management */
+.update-screen-shell {
+    width: 100%;
+    height: 1fr;
+    padding: 0 1;
+}
+
+.update-summary-card {
+    width: 100%;
+    height: auto;
+    max-height: 36;
+    margin: 0 0 1 0;
+}
+
+#update-issues {
+    width: 100%;
+    height: auto;
+    max-height: 9;
+    overflow-y: auto;
+    margin: 1 0 0 0;
+}
+
+.update-force-row {
+    width: 100%;
+    height: 3;
+    align-vertical: middle;
+    margin: 1 0 0 0;
+}
+
+.update-force-label {
+    width: 1fr;
+    height: 1;
+    content-align: left middle;
+}
+
+#update-force {
+    width: auto;
+    height: 3;
+}
+
+.update-console-card {
+    width: 100%;
+    height: 1fr;
+    min-height: 10;
+    margin: 0;
+}
+
+#update-action-dock {
+    width: 100%;
+    height: auto;
+    min-height: 7;
+    padding: 0 1;
+    background: $surface;
+}
+
+#update-log,
+#snapshot-log {
+    width: 100%;
+    height: 1fr;
+    min-height: 7;
+}
+
+.update-actions {
+    width: 100%;
+    min-height: 3;
+    margin: 1 0 0 0;
+}
+
+.update-actions Button {
+    min-width: 15;
+}
+
+.update-review-title {
+    margin: 1 0 0 0;
+}
+
+.update-file-list {
+    max-height: 10;
+    overflow-y: auto;
+    border: round $panel;
+    padding: 0 1;
+}
+
+#update-packages {
+    height: auto;
+    min-height: 3;
+    max-height: 11;
+    border: round $panel;
+}
+
+.snapshot-card {
+    width: 100%;
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+#snapshot-detail {
+    max-height: 11;
+    overflow-y: auto;
+}
+
+UpdateInstallationScreen.-compact .update-actions,
+SnapshotManagerScreen.-compact .update-actions {
+    layout: grid;
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    grid-gutter: 1 1;
+    height: auto;
+}
+
+UpdateInstallationScreen.-compact .update-actions Button,
+SnapshotManagerScreen.-compact .update-actions Button {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+}
+
+/* Resilient scrolling and live terminal output */
+#manage-scroll,
+#wizard,
+#installation-layout,
+.update-screen-shell {
+    width: 100%;
+    height: 1fr;
+    overflow-x: auto;
+    overflow-y: auto;
+    scrollbar-size: 1 1;
+    scrollbar-gutter: stable;
+}
+
+#manager-content {
+    width: 100%;
+    height: auto;
+    min-height: 30;
+}
+
+.manager-log-card {
+    height: 24;
+    min-height: 12;
+}
+
+.manager-log-toolbar {
+    width: 100%;
+    height: 3;
+    align-vertical: middle;
+    margin: 0 0 1 0;
+}
+
+.manager-log-title {
+    width: 1fr;
+    margin: 0;
+    content-align: left middle;
+}
+
+.manager-log-toolbar .log-action {
+    width: auto;
+    min-width: 12;
+    height: 3;
+    margin: 0 0 0 1;
+}
+
+#manager-log-preview,
+.embedded-terminal {
+    scrollbar-size: 1 1;
+    scrollbar-gutter: stable;
+}
+
+.home-actionbar {
+    height: 4;
+    min-height: 4;
+    padding: 0 1 1 1;
+}
+
+#home-status {
+    padding: 1 1 0 0;
+}
+
+.continue-button {
+    height: 3;
+    min-height: 3;
+    margin: 0;
+}
+
+HomeScreen.-compact .home-actionbar {
+    height: 8;
+    min-height: 8;
+    padding: 0 1 1 1;
+}
+
+HomeScreen.-compact #manager-content {
+    min-height: 44;
+}
+
+HomeScreen.-compact .manager-log-card {
+    height: 18;
+}
+
+/* Editable wheel-source chooser */
+.wheel-source-fields {
+    height: auto;
+    width: 100%;
+    layout: horizontal;
+}
+
+#wheel-source-label {
+    width: 18;
+    min-width: 18;
+    margin-right: 1;
+}
+
+#wheel-source-input {
+    width: 1fr;
+}
+
+InstallationScreen.-compact .wheel-source-fields {
+    layout: vertical;
+}
+
+InstallationScreen.-compact #wheel-source-label,
+InstallationScreen.-compact #wheel-source-input {
+    width: 100%;
+    margin-right: 0;
+}
+
+/* v0.8.0 dedicated workspace tabs */
+.asset-tab {
+    padding: 1 1;
+    width: 100%;
+    height: 100%;
+    overflow: auto auto;
+}
+
+.asset-summary-grid {
+    layout: grid;
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    grid-gutter: 1;
+    height: auto;
+}
+
+.asset-actions-grid {
+    layout: grid;
+    grid-size: 4;
+    grid-columns: 1fr 1fr 1fr 1fr;
+    grid-gutter: 1;
+    height: auto;
+    margin: 1 0;
+}
+
+.asset-actions-grid Button {
+    width: 100%;
+    min-width: 14;
+}
+
+.asset-list-card {
+    height: 1fr;
+    min-height: 14;
+}
+
+.asset-list-card SelectableLog {
+    height: 1fr;
+    min-height: 10;
+    border: solid $panel-lighten-2;
+}
+
+YamlConfigEditorScreen TextArea {
+    height: 1fr;
+    min-height: 18;
+    border: solid $panel-lighten-2;
+}
+
+/* Transactional editor for text members inside .comfyuisetup archives. */
+ProfileBundleEditorScreen {
+    layers: base overlay;
+}
+
+#profile-editor-layout {
+    width: 100%;
+    height: 1fr;
+    padding: 0 2;
+}
+
+#profile-editor-layout .screen-heading {
+    height: auto;
+    min-height: 3;
+    margin: 0;
+}
+
+.profile-file-picker {
+    height: auto;
+    padding: 1;
+    margin: 0 0 1 0;
+}
+
+#profile-file-editor {
+    width: 100%;
+    height: 1fr;
+    min-height: 12;
+    border: solid $panel-lighten-2;
+}
+
+#profile-file-status {
+    max-height: 5;
+    overflow-y: auto;
+}
+
+ProfileBundleEditorScreen.-compact #profile-editor-layout {
+    padding: 0 1;
+}
+
+Screen.-compact .asset-summary-grid,
+Screen.-compact .asset-actions-grid {
+    grid-size: 1;
+    grid-columns: 1fr;
+}
+
+
+/* Non-blocking initial/full scan dialog */
+ScanProgressScreen {
+    align: center middle;
+    background: $background 70%;
+}
+
+#scan-dialog {
+    width: 72;
+    max-width: 92%;
+    height: auto;
+    padding: 1 2;
+    background: $panel;
+    border: round $primary;
+}
+
+#scan-title {
+    width: 100%;
+    height: 1;
+    color: $primary;
+    text-style: bold;
+    margin-bottom: 1;
+}
+
+#scan-message,
+#scan-detail {
+    width: 100%;
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+#scan-progress {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+#scan-close {
+    width: 100%;
+    margin: 1 0 0 0;
+}
+
+.nodes-actions-grid {
+    grid-size: 3;
+    grid-columns: 1fr 1fr 1fr;
+}
+
+Screen.-compact .nodes-actions-grid {
+    grid-size: 1;
+    grid-columns: 1fr;
+}
+
+/* v0.8.5 reusable path inputs, autocomplete, and TUI browser */
+PathField {
+    layout: horizontal;
+    width: 100%;
+    height: 3;
+    margin: 0 0 1 0;
+}
+
+PathField Input {
+    width: 1fr;
+    height: 3;
+    margin: 0 1 0 0;
+}
+
+PathField .path-browse {
+    width: 12;
+    min-width: 12;
+    height: 3;
+    margin: 0;
+}
+
+.wheel-source-fields PathField {
+    width: 1fr;
+    margin: 0;
+}
+
+InstallationScreen.-compact .wheel-source-fields PathField {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+PathBrowserScreen {
+    align: center middle;
+    background: $background 70%;
+}
+
+#path-browser-dialog {
+    width: 96;
+    max-width: 96%;
+    height: 88%;
+    min-height: 20;
+    padding: 1 2;
+    background: $panel;
+    border: round $primary;
+}
+
+#path-browser-title {
+    width: 100%;
+    height: 1;
+    color: $primary;
+    text-style: bold;
+}
+
+#path-browser-help,
+#path-browser-status {
+    width: 100%;
+    height: auto;
+    color: $foreground-muted;
+    margin: 1 0 0 0;
+}
+
+#path-browser-tree {
+    width: 100%;
+    height: 1fr;
+    min-height: 10;
+    margin: 1 0;
+    border: round $border;
+    background: $background;
+}
+
+#path-browser-value {
+    margin: 0;
+}
+
+.path-browser-nav,
+.path-browser-actions {
+    width: 100%;
+    height: 3;
+    margin: 1 0 0 0;
+}
+
+.path-browser-nav {
+    align-horizontal: left;
+}
+
+.path-browser-actions {
+    align-horizontal: right;
+}
+
+.path-browser-nav Button,
+.path-browser-actions Button {
+    margin: 0 1 0 0;
+}
+
+ProfileDeleteConfirmScreen {
+    align: center middle;
+    background: $background 70%;
+}
+
+#profile-delete-dialog {
+    width: 72;
+    max-width: 92%;
+    height: auto;
+    padding: 1 2;
+    background: $panel;
+    border: round $error;
+}
+
+Screen.-compact PathField {
+    height: 7;
+    layout: vertical;
+}
+
+Screen.-compact PathField Input,
+Screen.-compact PathField .path-browse {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+
+/* v0.8.5 scroll-safe review/overview pages and runtime log management */
+
+.manager-log-toolbar {
+    height: auto;
+    min-height: 3;
+}
+
+HomeScreen.-compact .manager-log-toolbar {
+    layout: grid;
+    grid-size: 2;
+    grid-columns: 1fr 1fr;
+    grid-gutter: 1;
+    min-height: 7;
+}
+
+HomeScreen.-compact .manager-log-title {
+    column-span: 2;
+    width: 100%;
+}
+
+HomeScreen.-compact .manager-log-toolbar .log-action {
+    width: 100%;
+    margin: 0;
+}
+
+LogBrowserScreen #log-browser-shell {
+    width: 100%;
+    height: 1fr;
+    padding: 0 1;
+    scrollbar-size: 1 1;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+}
+
+.log-browser-controls {
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+.log-browser-actions,
+.retention-row {
+    width: 100%;
+    height: auto;
+    min-height: 3;
+    margin: 1 0 0 0;
+    align-vertical: middle;
+}
+
+.log-browser-actions Button {
+    margin: 0 1 0 0;
+}
+
+.retention-row Select {
+    width: 24;
+    margin: 0 1 0 0;
+}
+
+#log-retention-days {
+    width: 12;
+    margin: 0 1 0 0;
+}
+
+.retention-row Button {
+    margin: 0 1 0 0;
+}
+
+#log-file-view {
+    width: 100%;
+    height: 1fr;
+    min-height: 10;
+    background: $background;
+    border: round $border;
+    padding: 0 1;
+    scrollbar-size: 1 1;
+    scrollbar-gutter: stable;
+}
+
+LogDeleteConfirmScreen {
+    align: center middle;
+    background: $background 70%;
+}
+
+#log-delete-dialog {
+    width: 76;
+    max-width: 92%;
+    height: auto;
+    padding: 1 2;
+    background: $panel;
+    border: round $error;
+}
+
+LogBrowserScreen.-compact .retention-row,
+LogBrowserScreen.-compact .log-browser-actions {
+    layout: vertical;
+}
+
+LogBrowserScreen.-compact .retention-row Select,
+LogBrowserScreen.-compact #log-retention-days,
+LogBrowserScreen.-compact .retention-row Button,
+LogBrowserScreen.-compact .log-browser-actions Button {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+/* Explicit duplicate custom-node resolution during portable export */
+DuplicateNodeChoiceScreen {
+    align: center middle;
+    background: $background 70%;
+}
+
+#duplicate-node-dialog {
+    width: 92;
+    max-width: 96%;
+    height: auto;
+    max-height: 90%;
+    padding: 1 2;
+    background: $panel;
+    border: round $warning;
+}
+
+#duplicate-node-keep,
+#duplicate-node-paths {
+    width: 100%;
+    margin: 1 0;
+}
+
+#duplicate-node-paths {
+    max-height: 12;
+    overflow-y: auto;
+    scrollbar-size: 1 1;
+    scrollbar-gutter: stable;
+}

@@ -1,0 +1,37 @@
+schema_version: 1
+shared_assets:
+  # Leave blank until the user chooses a location. The manager suggests ~/ComfyUI-Shared.
+  models_path: null
+  workflows_path: null
+  migrate_existing: false
+  conflict_policy: preserve
+  workflow_user: default
+  model_subdirectories:
+    checkpoints: checkpoints
+    configs: configs
+    loras: loras
+    vae: vae
+    text_encoders: text_encoders
+    clip: clip
+    diffusion_models: diffusion_models
+    unet: unet
+    clip_vision: clip_vision
+    style_models: style_models
+    embeddings: embeddings
+    diffusers: diffusers
+    vae_approx: vae_approx
+    controlnet: controlnet
+    t2i_adapter: t2i_adapter
+    gligen: gligen
+    upscale_models: upscale_models
+    latent_upscale_models: latent_upscale_models
+    hypernetworks: hypernetworks
+    photomaker: photomaker
+    classifiers: classifiers
+    model_patches: model_patches
+    audio_encoders: audio_encoders
+    background_removal: background_removal
+    frame_interpolation: frame_interpolation
+    geometry_estimation: geometry_estimation
+    optical_flow: optical_flow
+    detection: detection

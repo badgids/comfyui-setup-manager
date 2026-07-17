@@ -1,0 +1,31 @@
+schema_version: 1
+sources:
+  - id: huggingface
+    name: Hugging Face model repositories
+    kind: huggingface
+    base_url: https://huggingface.co
+    label: Official/Publisher
+    enabled: true
+    notes: Use direct resolve paths supplied by the model publisher.
+  - id: github-releases
+    name: GitHub release assets
+    kind: direct-url
+    base_url: https://github.com
+    label: Official/Publisher
+    enabled: true
+    notes: Use direct public release-asset URLs from the model or node publisher.
+  - id: civitai
+    name: Civitai model downloads
+    kind: direct-url
+    base_url: https://civitai.com
+    label: 3rd Party
+    enabled: false
+    notes: Enable only when you understand the source and any account or API-token requirements.
+  - id: local
+    name: Local files
+    kind: local
+    base_url: null
+    label: Custom/Local
+    enabled: true
+    notes: Import files already downloaded or created on this computer.
+entries: []

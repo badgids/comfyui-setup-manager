@@ -1,0 +1,55 @@
+# Installer bootstrap/runtime
+.installer-tools/
+installer/.venv/
+__pycache__/
+*.py[cod]
+
+# ComfyUI runtime
+.venv/
+venv/
+.comfy-setup/
+.installer-build/
+.installer-wheelhouse/
+user/
+input/
+output/
+temp/
+*.log
+
+# Machine-specific paths and secrets
+extra_model_paths.yaml
+.env
+.env.*
+*.env
+
+# Models, LoRAs, checkpoints, engines, OCR data
+models/
+**/models/
+**/*.safetensors
+**/*.ckpt
+**/*.pt
+**/*.pth
+**/*.gguf
+**/*.bin
+**/*.onnx
+**/*.onnx_data
+**/*.engine
+**/*.plan
+**/*.trt
+**/*.traineddata
+**/tessdata/
+
+# Build output
+build/
+dist/
+*.egg-info/
+wheelhouse/
+generated-comfyui-installers/
+
+installer/uv.lock
+
+# Development and test environments
+.test-venv/
+.pytest_cache/
+.coverage
+htmlcov/

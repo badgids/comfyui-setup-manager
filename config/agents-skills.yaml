@@ -1,0 +1,24 @@
+schema_version: 1
+install_mode: copy
+agents:
+  claude-code:
+    name: Claude Code
+    enabled: true
+    skills_directory: ~/.claude/skills
+  codex:
+    name: Codex
+    enabled: true
+    skills_directory: ${CODEX_HOME}/skills
+    fallback_skills_directory: ~/.codex/skills
+  opencode:
+    name: OpenCode
+    enabled: true
+    skills_directory: ~/.config/opencode/skills
+  openclaude:
+    name: OpenClaude
+    enabled: true
+    skills_directory: ~/.claude/skills
+  universal:
+    name: Agent Skills compatible
+    enabled: true
+    skills_directory: ~/.agents/skills

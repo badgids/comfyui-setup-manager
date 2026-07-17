@@ -1,0 +1,315 @@
+schema_version: 1
+metadata:
+  name: ComfyUI Setup Manager precompiled wheel sources
+  description: Editable registry of official, curated third-party, and user-built wheel sources. Entries are matched
+    against the target operating system, architecture, Python wheel tags, PyTorch version, and acceleration runtime.
+  source_priority:
+  - Custom/Local
+  - Official
+  - 3rd Party
+  documentation:
+    pytorch: https://pytorch.org/get-started/previous-versions/
+    flash_attention: https://github.com/Dao-AILab/flash-attention/releases
+    cupy: https://docs.cupy.dev/en/stable/install.html
+    tensorrt: https://docs.nvidia.com/deeplearning/tensorrt/latest/installing-tensorrt/installing.html
+  badgids_profile_coverage:
+    linux_nvidia: Full accelerated path when matching wheels exist; WSL2 uses the Linux wheel path.
+    windows_nvidia: Uses official packages plus curated Windows FlashAttention, SageAttention, and Triton sources.
+    linux_rocm: Uses official ROCm PyTorch; CUDA-only Badgids components are disabled with explanations.
+    macos_mps: Uses official macOS/MPS PyTorch; CUDA-only components are disabled because upstream does not publish
+      macOS CUDA wheels.
+    cpu_only: Uses official CPU PyTorch; CUDA/ROCm-only components are disabled.
+sources:
+- id: official-flash-attention-releases
+  enabled: true
+  label: Official
+  package: flash-attn
+  kind: github-releases
+  location: https://github.com/Dao-AILab/flash-attention
+  platforms:
+  - linux
+  architectures:
+  - x86_64
+  - aarch64
+  accelerators:
+  - nvidia
+  priority: 100
+  notes: Upstream release assets. The manager validates Python, platform, PyTorch, CUDA and ABI markers before installation.
+- id: official-cupy-pypi
+  enabled: true
+  label: Official
+  package: cupy
+  kind: package-index
+  location: https://pypi.org/simple
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  - aarch64
+  accelerators:
+  - nvidia
+  priority: 100
+  notes: Official CuPy binary distributions. The resolver selects cupy-cuda12x or cupy-cuda13x from the detected
+    CUDA major.
+- id: official-cupy-prerelease
+  enabled: false
+  label: Official
+  package: cupy
+  kind: find-links
+  location: https://pip.cupy.dev/pre
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  - aarch64
+  accelerators:
+  - nvidia
+  priority: 50
+  notes: Official CuPy pre-release wheels; disabled while stable wheels work.
+- id: official-tensorrt-pypi
+  enabled: true
+  label: Official
+  package: tensorrt
+  kind: package-index
+  location: https://pypi.org/simple
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 100
+  notes: Official tensorrt-cu12 and tensorrt-cu13 packages published on PyPI.
+- id: official-tensorrt-nvidia-index
+  enabled: true
+  label: Official
+  package: tensorrt
+  kind: package-index
+  location: https://pypi.nvidia.com
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: NVIDIA public package index fallback for TensorRT dependency wheels.
+- id: official-onnxruntime-pypi
+  enabled: true
+  label: Official
+  package: onnxruntime
+  kind: package-index
+  location: https://pypi.org/simple
+  platforms:
+  - linux
+  - windows
+  - macos
+  architectures:
+  - all
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  priority: 100
+  notes: Official ONNX Runtime CPU and accelerator packages.
+- id: official-pyopengl-accelerate-pypi
+  enabled: true
+  label: Official
+  package: pyopengl-accelerate
+  kind: package-index
+  location: https://pypi.org/simple
+  platforms:
+  - linux
+  - windows
+  - macos
+  architectures:
+  - all
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  priority: 100
+  notes: Official PyOpenGL-accelerate wheels when a matching wheel is published.
+- id: official-triton-pypi
+  enabled: true
+  label: Official
+  package: triton
+  kind: package-index
+  location: https://pypi.org/simple
+  platforms:
+  - linux
+  architectures:
+  - x86_64
+  - aarch64
+  accelerators:
+  - nvidia
+  - rocm
+  priority: 100
+  notes: Official Triton wheels for supported Linux environments.
+- id: third-party-pozzetti-flash-attn
+  enabled: true
+  label: 3rd Party
+  package: flash-attn
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/flash-attn/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: Curated ComfyUI-oriented CUDA/PyTorch/Python wheel matrix.
+- id: third-party-kingbri1-flash-attn-windows
+  enabled: true
+  label: 3rd Party
+  package: flash-attn
+  kind: github-releases
+  location: https://github.com/kingbri1/flash-attention
+  platforms:
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 80
+  notes: Widely used Windows FlashAttention release wheels.
+- id: third-party-lldacing-flash-attn-windows
+  enabled: true
+  label: 3rd Party
+  package: flash-attn
+  kind: huggingface
+  location: https://huggingface.co/lldacing/flash-attention-windows-wheel
+  platforms:
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 70
+  notes: Community Windows FlashAttention wheel archive on Hugging Face.
+- id: third-party-pozzetti-sageattention
+  enabled: true
+  label: 3rd Party
+  package: sageattention
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/sageattention/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: Curated SageAttention wheel matrix built from thu-ml/SageAttention.
+- id: third-party-woct0rdho-sageattention-windows
+  enabled: true
+  label: 3rd Party
+  package: sageattention
+  kind: github-releases
+  location: https://github.com/woct0rdho/SageAttention
+  platforms:
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 80
+  notes: Windows-focused SageAttention wheels and compatibility patches.
+- id: third-party-triton-windows
+  enabled: true
+  label: 3rd Party
+  package: triton
+  kind: github-releases
+  location: https://github.com/woct0rdho/triton-windows
+  platforms:
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: Community Triton wheels for native Windows.
+- id: third-party-pozzetti-cumesh
+  enabled: true
+  label: 3rd Party
+  package: cumesh
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/cumesh/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: GeometryPack CuMesh extension wheels.
+- id: third-party-pozzetti-cumesh-vb
+  enabled: true
+  label: 3rd Party
+  package: cumesh-vb
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/cumesh-vb/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: TRELLIS2 CuMesh-VB extension wheels.
+- id: third-party-pozzetti-drtk
+  enabled: true
+  label: 3rd Party
+  package: drtk
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/drtk/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: TRELLIS2 DRTK extension wheels.
+- id: third-party-pozzetti-flex-gemm-ap
+  enabled: true
+  label: 3rd Party
+  package: flex-gemm-ap
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/flex-gemm-ap/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: TRELLIS2 FlexGEMM AP extension wheels.
+- id: third-party-pozzetti-o-voxel-vb-ap
+  enabled: true
+  label: 3rd Party
+  package: o-voxel-vb-ap
+  kind: find-links
+  location: https://pozzettiandrea.github.io/cuda-wheels/o-voxel-vb-ap/
+  platforms:
+  - linux
+  - windows
+  architectures:
+  - x86_64
+  accelerators:
+  - nvidia
+  priority: 90
+  notes: TRELLIS2 O-Voxel VB AP extension wheels.

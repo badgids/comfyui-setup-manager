@@ -1,0 +1,9 @@
+ComfyUI Setup Manager
+Copyright 2026 Alan Guice (Badgids)
+
+Licensed under the Apache License, Version 2.0.
+
+This project manages third-party software. ComfyUI, custom nodes, Python
+packages, models, SDKs, compilers, and downloaded artifacts keep their own
+licenses and copyright notices. Users are responsible for reviewing those
+licenses before redistributing a setup or workflow pack.

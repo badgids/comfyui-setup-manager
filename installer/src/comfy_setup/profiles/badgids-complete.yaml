@@ -1,0 +1,540 @@
+schema_version: 4
+id: badgids-comfyui-complete
+name: Badgids Complete ComfyUI [cp313-cuda130-torch2_12_1_cu130]
+display_name: Badgids Complete ComfyUI [cp313-cuda130-torch2_12_1_cu130]
+version: 2026.07.16
+compatibility:
+  profile_version: 2026.7.16
+  pep440: true
+  exact: true
+  python_version: 3.13.14
+  python_abi: cp313
+  accelerator: nvidia
+  backend_version: '13.0'
+  accelerator_abi: cuda130
+  pytorch_version: 2.12.1+cu130
+  pytorch_abi: torch2_12_1_cu130
+  abi_tag: cp313-cuda130-torch2_12_1_cu130
+  label: Python 3.13.14 (cp313) · CUDA 13.0 · PyTorch 2.12.1+cu130
+description: A portable installer profile reconstructed from the working Badgids ComfyUI setup.
+source_inventory:
+  comfyui_version: 0.28.0
+  comfyui_commit: f467d4bb47adafbaf0114a52837419d6c8d8058b
+  python: 3.13.14
+  torch: 2.12.1+cu130
+  gpu: NVIDIA GeForce RTX 4090
+  cuda: '13.0'
+  inventory_archive: comfyui_inventory.tgz
+comfyui:
+  repository: https://github.com/badgids/ComfyUI.git
+  branch: master
+  preferred_commit: null
+  use_current_checkout_when_available: true
+python:
+  preferred: 3.13.14
+  fallbacks:
+  - 3.13.14
+torch:
+  version: 2.12.1
+  torchvision: 0.27.1
+  torchaudio: null
+  indexes:
+    nvidia: https://download.pytorch.org/whl/cu130
+    rocm: https://download.pytorch.org/whl/rocm7.2
+    cpu: https://download.pytorch.org/whl/cpu
+    mps: ''
+    nvidia_cuda12: https://download.pytorch.org/whl/cu128
+    nvidia_cuda13: https://download.pytorch.org/whl/cu130
+    nvidia_cuda126: https://download.pytorch.org/whl/cu126
+    nvidia_cuda130: https://download.pytorch.org/whl/cu130
+    nvidia_cuda132: https://download.pytorch.org/whl/cu132
+    rocm72: https://download.pytorch.org/whl/rocm7.2
+  fallback_unpinned: false
+constraints:
+  numpy: 2.4.4
+  transformers: 4.57.3
+  numba: 0.66.0
+  librosa: 0.11.0
+  comfy-kitchen: 0.2.20
+  comfyui-frontend-package: 1.45.21
+  comfyui-workflow-templates: 0.11.9
+  comfyui-embedded-docs: 0.5.8
+  comfy-aimdo: 0.4.10
+  comfy-env: 0.3.89
+  comfy-3d-viewers: 0.2.44
+  comfy-sparse-attn: 0.1.3
+system_dependencies:
+- id: git
+  name: Git
+  commands:
+  - git
+  required: true
+  why: Clones ComfyUI and custom-node repositories.
+- id: ffmpeg
+  name: FFmpeg
+  commands:
+  - ffmpeg
+  - ffprobe
+  required: true
+  why: VideoHelperSuite, frame interpolation, audio/video decoding, and encoding.
+- id: sox
+  name: SoX
+  commands:
+  - sox
+  required: false
+  why: Qwen3-TTS audio processing and format support.
+- id: cmake
+  name: CMake
+  commands:
+  - cmake
+  required: false
+  why: Source builds and WAS Node Suite dependencies.
+- id: ninja
+  name: Ninja
+  commands:
+  - ninja
+  required: false
+  why: Fast native/CUDA extension builds.
+- id: compiler
+  name: C/C++ compiler
+  commands:
+  - __compiler__
+  required: false
+  why: Builds packages when a matching wheel is unavailable.
+- id: tesseract
+  name: Tesseract OCR
+  commands:
+  - tesseract
+  required: false
+  why: OCR-capable nodes. Language packs remain managed by the operating system and are never bundled.
+- id: pkg-config
+  name: pkg-config
+  commands:
+  - pkg-config
+  required: false
+  why: Helps source builds find native audio, image, OpenGL, and compiler libraries.
+- id: rust
+  name: Rust toolchain
+  commands:
+  - cargo
+  - rustc
+  required: false
+  why: Used only when a Python dependency has no wheel and its source build requires Rust.
+nodes:
+- id: frame-interpolation
+  name: ComfyUI Frame Interpolation
+  folder: ComfyUI-Frame-Interpolation
+  description: RIFE, FILM, GMFSS and other frame-interpolation nodes.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements-no-cupy.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/Fannovel16/ComfyUI-Frame-Interpolation.git
+    ref: 26545cc2dd95bc3d27f056016300673bdeee78f5
+    preferred: git
+- id: geometry-pack
+  name: GeometryPack
+  folder: ComfyUI-GeometryPack
+  description: Isolated mesh and geometry tooling using comfy-env and Pixi.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: true
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/PozzettiAndrea/ComfyUI-GeometryPack.git
+    ref: c67199de05705642258e727fa118f412877b4ebf
+    preferred: git
+- id: trellis2
+  name: TRELLIS2
+  folder: ComfyUI-TRELLIS2
+  description: Image-to-3D generation in an isolated comfy-env/Pixi environment.
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  requirements: requirements.txt
+  run_install_py: true
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/PozzettiAndrea/ComfyUI-TRELLIS2.git
+    ref: 9b878516f2dc2fd873f4f6cceadba403dd12d83e
+    preferred: git
+- id: gguf
+  name: ComfyUI-GGUF
+  folder: ComfyUI-GGUF
+  reference_version: 1.1.10
+  description: GGUF quantized-model support.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/city96/ComfyUI-GGUF.git
+    ref: main
+    preferred: git
+- id: rife-tensorrt
+  name: RIFE TensorRT Auto
+  folder: ComfyUI_RIFE_TensorRT_Auto
+  reference_version: 1.1.1
+  description: NVIDIA TensorRT-accelerated RIFE interpolation.
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/silveroxides/ComfyUI_RIFE_TensorRT_Auto.git
+    ref: main
+    preferred: git
+- id: ace-step
+  name: ACE-Step
+  folder: ace-step
+  reference_version: 1.1.6
+  description: Music generation with ACE-Step.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/billwuhao/ComfyUI_ACE-Step.git
+    ref: main
+    preferred: git
+- id: gimm-vfi
+  name: GIMM-VFI
+  folder: comfy-gimm-vfi
+  reference_version: 1.0.0
+  description: GIMM video frame interpolation.
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/Mattabyte/ComfyUI-GIMM-VFI.git
+    ref: main
+    preferred: git
+- id: kjnodes
+  name: KJNodes
+  folder: comfyui-kjnodes
+  reference_version: 1.4.7
+  description: Kijai's general-purpose quality-of-life nodes.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/kijai/ComfyUI-KJNodes.git
+    ref: main
+    preferred: git
+- id: video-helper-suite
+  name: Video Helper Suite
+  folder: comfyui-videohelpersuite
+  reference_version: 1.7.9
+  description: Video loading, combining, encoding, and batch utilities.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git
+    ref: main
+    preferred: git
+- id: qwen3-tts
+  name: Qwen3-TTS
+  folder: qwen3-tts-comfyui
+  reference_version: 1.0.7
+  description: Speech synthesis, voice cloning, and voice design.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/flybirdxx/ComfyUI-Qwen-TTS.git
+    ref: main
+    preferred: git
+- id: teacache-hunyuan
+  name: TeaCache HunyuanVideo
+  folder: teacachehunyuanvideo
+  reference_version: 1.0.0
+  description: TeaCache acceleration nodes for native HunyuanVideo.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: null
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/facok/ComfyUI-TeaCacheHunyuanVideo.git
+    ref: main
+    preferred: git
+- id: was-node-suite
+  name: WAS Node Suite (Revised)
+  folder: was-ns
+  reference_version: 3.0.1
+  description: Large image, text, masking, and utility node suite.
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  requirements: requirements.txt
+  run_install_py: false
+  selected: true
+  source:
+    type: remote
+    repository: https://github.com/ltdrdata/was-node-suite-comfyui.git
+    ref: main
+    preferred: git
+accelerated_packages:
+- id: cupy
+  name: CuPy
+  import_name: cupy
+  kind: dynamic-cupy
+  version: 13.6.0
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  selected: true
+  description: CUDA array kernels used by frame-interpolation nodes.
+- id: tensorrt
+  name: TensorRT
+  import_name: tensorrt
+  kind: dynamic-tensorrt
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  selected: true
+  description: NVIDIA TensorRT runtime selected for the detected CUDA major version.
+  versions:
+    '13': 10.14.1.48.post1
+- id: onnxruntime
+  name: ONNX Runtime
+  import_name: onnxruntime
+  kind: dynamic-onnxruntime
+  version: 1.27.0
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  selected: true
+  description: ONNX execution provider for Qwen3-TTS and utility nodes.
+- id: flash-attn
+  name: FlashAttention 2
+  import_name: flash_attn
+  kind: wheel-or-source
+  package: flash-attn==2.8.3.post1
+  source_repository: https://github.com/Dao-AILab/flash-attention.git
+  source_ref: v2.8.3.post1
+  source_subdir: .
+  build_requirements:
+  - packaging
+  - setuptools
+  - wheel
+  - ninja
+  - einops
+  requires_cuda: true
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  selected: true
+  description: Optimized attention used by Qwen3-TTS and compatible workflows.
+  source_ref_fallback: main
+- id: sageattention
+  name: SageAttention 2.2
+  import_name: sageattention
+  kind: wheel-or-source
+  package: sageattention==2.2.0
+  source_repository: https://github.com/thu-ml/SageAttention.git
+  source_ref: v2.2.0
+  source_ref_fallback: main
+  source_subdir: .
+  build_requirements:
+  - packaging
+  - setuptools
+  - wheel
+  - ninja
+  requires_cuda: true
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  selected: true
+  description: SageAttention kernels with source-build fallback.
+- id: flash-attn-3
+  name: FlashAttention 3 (experimental)
+  import_name: flash_attn_interface
+  kind: wheel-or-source
+  package: flash-attn-3
+  source_repository: https://github.com/Dao-AILab/flash-attention.git
+  source_ref: main
+  source_subdir: hopper
+  build_requirements:
+  - packaging
+  - setuptools
+  - wheel
+  - ninja
+  - einops
+  requires_cuda: true
+  minimum_compute_capability: 9.0
+  platforms:
+  - windows
+  - linux
+  accelerators:
+  - nvidia
+  selected: false
+  description: Experimental Hopper/Blackwell-oriented package; disabled unless hardware is compatible.
+- id: pyopengl-accelerate
+  name: PyOpenGL Accelerate
+  import_name: OpenGL_accelerate
+  kind: pip-wheel-preferred
+  package: PyOpenGL_accelerate
+  platforms:
+  - windows
+  - linux
+  - macos
+  accelerators:
+  - nvidia
+  - rocm
+  - mps
+  - cpu
+  selected: true
+  description: Optional compiled PyOpenGL speedups.
+post_install:
+  copy_websocket_example: true
+  generate_launchers: true
+  validate_imports:
+  - torch
+  - numpy
+  - transformers
+  - comfy_kitchen
+  - librosa
+  - numba
+kind: comfyui-setup-profile
+extra_python_packages:
+- click>=8.1,<9
+export_metadata:
+  source: badgids-working-inventory
+  models_included: false
+  machine_paths_included: false
+  remote_node_count: 12
+  embedded_unpublished_node_count: 0
+models: []
+workflows: []
+asset_sources:
+  models:
+    schema_version: 1
+    sources: []
+    entries: []
+  workflows:
+    schema_version: 1
+    sources: []
+    entries: []
+libraries:
+  shared_models:
+    enabled: true
+    required: false
+    description: Use one external model library across managed ComfyUI installations.
+  shared_workflows:
+    enabled: true
+    required: false
+    description: Use one external workflow library across managed ComfyUI installations.
+  paths_embedded: false
+dependency_repairs:
+  click: click>=8.1,<9

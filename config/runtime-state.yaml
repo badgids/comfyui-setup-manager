@@ -1,0 +1,11 @@
+schema_version: 1
+initialized: false
+last_scan_utc: null
+platform: {}
+installations: []
+nodes: {}
+instance_workflows: {}
+assets:
+  models: []
+  loras: []
+  workflows: []

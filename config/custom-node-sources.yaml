@@ -1,0 +1,31 @@
+schema_version: 2
+network:
+  enabled: true
+  timeout_seconds: 20
+  refresh_catalog_daily: true
+sources:
+  - id: comfy-registry-search
+    name: Official Comfy Registry search fallback
+    kind: registry-search
+    url: https://api.comfy.org/nodes/search
+    trust: Official
+    enabled: true
+  - id: comfy-registry-daily
+    name: Official Comfy Registry daily catalog
+    kind: registry-daily
+    url: https://api.comfy.org/nodes
+    trust: Official
+    enabled: true
+  - id: comfyui-manager-node-db
+    name: Official ComfyUI Manager maintained legacy node database
+    kind: manager-node-db
+    url: https://raw.githubusercontent.com/Comfy-Org/ComfyUI-Manager/main/node_db
+    trust: Official
+    channels:
+      - dev
+      - new
+      - legacy
+      - forked
+      - tutorial
+    enabled: true
+mappings: []

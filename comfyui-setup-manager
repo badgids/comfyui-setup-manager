@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+VENV_DIR="$SCRIPT_DIR/installer/.venv"
+VENV_PYTHON="$VENV_DIR/bin/python"
+VENV_UV="$VENV_DIR/bin/uv"
+PYPI_INDEX="https://pypi.org/simple"
+EXPECTED_VERSION="0.8.7"
+
+if [ ! -x "$VENV_PYTHON" ] || ! "$VENV_PYTHON" -c 'import comfy_setup,sys; sys.exit(0 if comfy_setup.__version__ == "0.8.7" else 1)' >/dev/null 2>&1; then
+    printf '\nComfyUI Setup Manager is not installed yet; running the local installer...\n'
+    exec "$SCRIPT_DIR/install.sh" "$@"
+fi
+
+unset PIP_INDEX_URL PIP_EXTRA_INDEX_URL PIP_TRUSTED_HOST PIP_CONFIG_FILE || true
+unset UV_INDEX UV_EXTRA_INDEX_URL UV_INDEX_URL UV_DEFAULT_INDEX UV_CONFIG_FILE || true
+export PIP_CONFIG_FILE=/dev/null
+export PIP_INDEX_URL="$PYPI_INDEX"
+export UV_NO_CONFIG=1
+export UV_DEFAULT_INDEX="$PYPI_INDEX"
+export COMFY_INSTALLER_UV="$VENV_UV"
+export COMFYUI_SETUP_CONFIG_DIR="$SCRIPT_DIR/config"
+export COMFYUI_SETUP_PROJECT_ROOT="$SCRIPT_DIR"
+mkdir -p "$SCRIPT_DIR/profiles"
+
+exec "$VENV_PYTHON" -m comfy_setup "$@"

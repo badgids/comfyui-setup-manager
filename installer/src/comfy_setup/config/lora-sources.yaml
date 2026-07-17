@@ -1,0 +1,31 @@
+schema_version: 1
+sources:
+  - id: huggingface
+    name: Hugging Face LoRA repositories
+    kind: huggingface
+    base_url: https://huggingface.co
+    label: Official/Publisher
+    enabled: true
+    notes: Use direct resolve paths supplied by the LoRA publisher.
+  - id: github-releases
+    name: GitHub release assets
+    kind: direct-url
+    base_url: https://github.com
+    label: Official/Publisher
+    enabled: true
+    notes: Use direct public release-asset URLs from the publisher.
+  - id: civitai
+    name: Civitai LoRA downloads
+    kind: direct-url
+    base_url: https://civitai.com
+    label: 3rd Party
+    enabled: false
+    notes: Enable only when you understand the source and account or API-token requirements.
+  - id: local
+    name: Local LoRA files
+    kind: local
+    base_url: null
+    label: Custom/Local
+    enabled: true
+    notes: Import LoRAs already downloaded or created on this computer.
+entries: []

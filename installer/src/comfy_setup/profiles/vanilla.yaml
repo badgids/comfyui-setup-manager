@@ -1,0 +1,96 @@
+schema_version: 4
+kind: comfyui-setup-profile
+id: vanilla-comfyui
+name: Vanilla ComfyUI [cp312-accelany-torch2_8_0]
+display_name: Vanilla ComfyUI [cp312-accelany-torch2_8_0]
+version: 0.8.7
+compatibility:
+  profile_version: 0.8.7
+  pep440: true
+  exact: false
+  python_version: '3.12'
+  python_abi: cp312
+  accelerator: any
+  backend_version: ''
+  accelerator_abi: accelany
+  pytorch_version: 2.8.0
+  pytorch_abi: torch2_8_0
+  abi_tag: cp312-accelany-torch2_8_0
+  label: Python 3.12 (cp312) · accelerator auto · PyTorch 2.8.0
+publisher: ComfyUI Setup Manager
+description: Official ComfyUI with no third-party custom-node profile applied.
+comfyui:
+  repository: https://github.com/Comfy-Org/ComfyUI.git
+  official_repository: https://github.com/Comfy-Org/ComfyUI.git
+  branch: master
+  preferred_commit: null
+python:
+  preferred: '3.12'
+  fallbacks:
+  - '3.11'
+  - '3.13'
+torch:
+  version: 2.8.0
+  torchvision: 0.23.0
+  torchaudio: 2.8.0
+  indexes:
+    nvidia: https://download.pytorch.org/whl/cu128
+    nvidia_cuda12: https://download.pytorch.org/whl/cu128
+    nvidia_cuda126: https://download.pytorch.org/whl/cu126
+    nvidia_cuda128: https://download.pytorch.org/whl/cu128
+    nvidia_cuda129: https://download.pytorch.org/whl/cu129
+    rocm: https://download.pytorch.org/whl/rocm6.4
+    rocm64: https://download.pytorch.org/whl/rocm6.4
+    cpu: https://download.pytorch.org/whl/cpu
+    mps: ''
+  fallback_unpinned: true
+constraints: {}
+extra_python_packages: []
+system_dependencies:
+- id: git
+  name: Git
+  commands:
+  - git
+  required: true
+  why: Clones the official ComfyUI repository.
+- id: ffmpeg
+  name: FFmpeg
+  commands:
+  - ffmpeg
+  - ffprobe
+  required: false
+  why: Audio and video workflows.
+nodes: []
+accelerated_packages: []
+post_install:
+  copy_websocket_example: false
+  generate_launchers: true
+  validate_imports:
+  - torch
+export_metadata:
+  source: built-in
+  models_included: false
+  machine_paths_included: false
+  remote_node_count: 0
+  embedded_unpublished_node_count: 0
+models: []
+workflows: []
+asset_sources:
+  models:
+    schema_version: 1
+    sources: []
+    entries: []
+  workflows:
+    schema_version: 1
+    sources: []
+    entries: []
+libraries:
+  shared_models:
+    enabled: true
+    required: false
+    description: Use one external model library across managed ComfyUI installations.
+  shared_workflows:
+    enabled: true
+    required: false
+    description: Use one external workflow library across managed ComfyUI installations.
+  paths_embedded: false

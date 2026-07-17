@@ -1,0 +1,24 @@
+schema_version: 1
+sources:
+  - id: comfyui-templates
+    name: Official ComfyUI templates
+    kind: direct-url
+    base_url: https://github.com/Comfy-Org/ComfyUI
+    label: Official
+    enabled: true
+    notes: Official ComfyUI examples and templates. Add a direct workflow or bundle URL as an entry.
+  - id: github
+    name: GitHub workflow repositories and releases
+    kind: direct-url
+    base_url: https://github.com
+    label: Official/Publisher
+    enabled: true
+    notes: Use direct raw-file or release-asset URLs from a public repository.
+  - id: local
+    name: Local workflow files
+    kind: local
+    base_url: null
+    label: Custom/Local
+    enabled: true
+    notes: Import native JSON workflows or .comfyworkflows archives from disk.
+entries: []

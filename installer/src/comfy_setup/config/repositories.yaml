@@ -1,0 +1,19 @@
+schema_version: 1
+repositories:
+  comfyui_official:
+    label: Official ComfyUI
+    url: https://github.com/Comfy-Org/ComfyUI.git
+    default_branch: master
+    trust: Official
+  pytorch_official_wheels:
+    label: Official PyTorch wheel service
+    url: https://download.pytorch.org/whl
+    trust: Official
+  nvidia_python_index:
+    label: NVIDIA public Python package index
+    url: https://pypi.nvidia.com
+    trust: Official
+  pypi:
+    label: Python Package Index
+    url: https://pypi.org/simple
+    trust: Official
