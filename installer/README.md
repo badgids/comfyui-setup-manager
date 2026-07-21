@@ -1,7 +1,7 @@
 # ComfyUI Setup Manager
 
 **Author and creator:** [Alan Guice (Badgids)](https://github.com/badgids)  
-**License:** [Apache License 2.0](LICENSE)  
+**License:** [Apache License 2.0](../LICENSE)  
 **Version:** 0.8.7
 
 ComfyUI Setup Manager is a standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows.
@@ -42,30 +42,29 @@ Every important TUI action has a CLI command. CLI output can be text, JSON, or Y
 
 ## Requirements
 
-The install scripts check for missing prerequisites and install them when the operating system has a supported package manager.
+The manager itself requires Python 3.10+, Git, internet access for public downloads, and write access to the selected project/install/library directories.
 
-### Required
+### Windows and WinGet
 
-| Requirement | Minimum | Purpose |
-|---|---:|---|
-| Python | 3.10 | Runs the manager and creates managed environments |
-| Git | Supported current release | Downloads and updates ComfyUI and public custom nodes |
-| Internet access | When downloading | Gets public packages, repositories, models, workflows, and wheels |
+The Windows bootstrap checks for Python and Git. If either is missing, `install.ps1` installs it with **WinGet**, so WinGet is a prerequisite for automatic Windows bootstrapping on an otherwise unprepared system. WinGet is not required when compatible Python and Git are already installed and visible in the terminal.
 
-### Required only for source builds
+Check before installing:
 
-| Requirement | Purpose |
-|---|---|
-| C/C++ compiler | Builds native Python extensions |
-| CMake and Ninja | Configure and build native projects |
-| CUDA toolkit | Builds NVIDIA extensions when no matching wheel exists |
-| ROCm development tools | Builds supported AMD extensions |
-| Visual Studio Build Tools | Native builds on Windows |
-| Xcode Command Line Tools | Native builds on macOS |
+```powershell
+winget --version
+python --version
+git --version
+```
 
-The bootstrap understands common package managers such as `apt-get`, `dnf`, `pacman`, Homebrew, and Windows `winget`. Unsupported systems receive exact instructions instead of hidden changes.
+WinGet is supplied by Microsoft's App Installer. The bootstrap cannot install WinGet itself; install/repair App Installer first, or manually install Python 3.10+ and Git. No global `uv` installation is needed.
 
-See [Getting started](docs/getting-started.md) and [Wheels and source builds](docs/wheels-and-builds.md).
+### Optional source-build tools
+
+Native source fallbacks may require a C/C++ compiler, CMake, Ninja, Python development headers, and a matching CUDA or ROCm development toolkit. Some packages also require Rust or `pkg-config`. These are not needed when compatible wheels are available.
+
+Setup profiles can add their own system dependencies. Keep those requirements with the profile rather than treating them as global manager prerequisites. The bundled Badgids profile is documented separately.
+
+Read the complete [Prerequisites and platform preparation](../docs/prerequisites.md) guide and the [Badgids Complete profile](../docs/badgids-complete-profile.md) guide before installation.
 
 ## Install the manager
 
@@ -123,7 +122,7 @@ For each managed ComfyUI installation, the manager:
 
 Shared paths are enabled by default during installation. The TUI walks the user through selecting paths and optionally migrating existing workflows.
 
-Read this before managing several installations: [Shared models and workflows](docs/shared-assets.md).
+Read this before managing several installations: [Shared models and workflows](../docs/shared-assets.md).
 
 CLI example:
 
@@ -156,7 +155,7 @@ On the first launch, the interface renders before the full system scan begins. A
 
 When an installation is detected, **Launch & Manage** is the default tab. When none is detected, **Setup & Install** opens first.
 
-See [Textual interface guide](docs/tui-guide.md).
+See [Textual interface guide](../docs/tui-guide.md).
 
 ## Use the CLI without the TUI
 
@@ -183,7 +182,7 @@ Machine-readable output:
 ./comfyui-setup-manager installations logs /path/to/ComfyUI --retention monthly
 ```
 
-See [Complete CLI reference](docs/cli-reference.md) and [Automation and agents](docs/automation-and-agents.md).
+See [Complete CLI reference](../docs/cli-reference.md) and [Automation and agents](../docs/automation-and-agents.md).
 
 ## Main tabs
 
@@ -207,7 +206,7 @@ Browse nested workflow files, import/export native JSON, create/install `.comfyw
 
 Browse, import, export, download, delete, and catalog non-LoRA model files. The Models inventory explicitly excludes the `loras/` subtree.
 
-See [Model library and downloads](docs/models.md).
+See [Model library and downloads](../docs/models.md).
 
 ### LoRAs
 
@@ -288,11 +287,11 @@ When the same custom-node destination identity exists in more than one configure
 ./comfyui-setup-manager updates run /path/to/ComfyUI --strategy patch
 ```
 
-The updater reviews changed core files and direct core libraries without treating normal ComfyUI evolution as a failure. It protects every installed non-core package and every unselected core package. It never runs upstream requirement files independently, never resolves packages for an already-current or file-only update, and installs only reviewed core libraries that actually need to change. Custom-node manifests are checked for direct conflicts but are not treated as a fresh global install recipe. Every candidate must pass `pip check` and full startup/import validation; any failed mutation is rolled back automatically. The fixed TUI action dock offers **Safe update**, **Try to patch current setup**, **Continue anyway**, **Create new install**, and **Abort update**. See [Updates and rollback](docs/updates-and-rollback.md).
+The updater reviews changed core files and direct core libraries without treating normal ComfyUI evolution as a failure. It protects every installed non-core package and every unselected core package. It never runs upstream requirement files independently, never resolves packages for an already-current or file-only update, and installs only reviewed core libraries that actually need to change. Custom-node manifests are checked for direct conflicts but are not treated as a fresh global install recipe. Every candidate must pass `pip check` and full startup/import validation; any failed mutation is rolled back automatically. The fixed TUI action dock offers **Safe update**, **Try to patch current setup**, **Continue anyway**, **Create new install**, and **Abort update**. See [Updates and rollback](../docs/updates-and-rollback.md).
 
 ### Profile versions and ABI identity
 
-New `.comfyuisetup` exports store a normalized PEP 440 version and a combined Python/accelerator/PyTorch ABI tag such as `cp312-cuda124-torch2_6_0_cu124`. The profile selector and Profile Library show the creation date/version, exact compatibility values, and tag so two visually similar builds are not mistaken for binary-compatible environments. See [PEP 440 versions and ABI compatibility tags](docs/abi-compatibility-tags.md).
+New `.comfyuisetup` exports store a normalized PEP 440 version and a combined Python/accelerator/PyTorch ABI tag such as `cp312-cuda124-torch2_6_0_cu124`. The profile selector and Profile Library show the creation date/version, exact compatibility values, and tag so two visually similar builds are not mistaken for binary-compatible environments. See [PEP 440 versions and ABI compatibility tags](../docs/abi-compatibility-tags.md).
 
 ## Portable setup and workflow files
 
@@ -324,7 +323,7 @@ Exact exports are reconstruction manifests, not checkout or virtual-environment 
 
 The ComfyUI checkout is recreated from its referenced repository. `git diff` is used to add a compact `comfyui_overlay/` containing only changed/new core files and deletions relative to the fetchable base revision; `custom_nodes`, environments, models, user/runtime data, generated launchers, shared-path files, and files supplied by node installation are excluded. `environment-lock.yaml` records every installed distribution and exact working versions. During reconstruction, a node with a validated Git repository is cloned directly; its Manager/Registry ID remains provenance and a fallback only when no repository is available. Manager-only acquisition uses `--no-deps`, never `--uv-compile`, so it cannot perform a second global solve or replace the exported PyTorch, NumPy, or other locked packages. Managed accelerator lifecycles preserve the exact distribution identity from the working lock (for example `cupy-cuda12x`, not an inferred replacement family), and native source-build environments install generic tools before reapplying the exact target PyTorch stack so build tooling cannot violate PyTorch's own constraints. A complete exact environment lock is installed once. Node manifests are still copied, reconciled, and audited, but are not installed again. Dependency-only `install.py` scripts are skipped for exact profiles, while required lifecycle scripts such as `comfy-env.toml` bootstrap continue to run. `requirements*.txt`, `pyproject.toml`, `uv.lock`, `manager_requirements.txt`, and related dependency manifests from ComfyUI and its nodes are copied under `dependency_manifests/` for comparison and audit, not as source backups. During installation, captured manifests are reconciled before they are submitted to uv: when a manifest requests a version that contradicts the package version proven to work in the exported environment, the generated install manifest uses the verified version and records the override in the console/report instead of passing an impossible requirement-plus-constraint pair. Local wheels and installed libraries are not archived by new exports; public indexes, configured wheel sources, public Git repositories, Manager/Registry installation, and source-build rules are preferred. Legacy profiles containing embedded wheels remain readable. Exact export never silently chooses between duplicate node copies: it requires an explicit keep/omit decision and records it. Large models and machine-specific paths are never exported. By default, profile files are written to `<project-root>/profiles/`; pass an explicit output path to use another directory.
 
-See [Setup profiles](docs/setup-profiles.md), [Profile format](PROFILE_FORMAT.md), [Workflow format](WORKFLOW_FORMAT.md), [Manual profile and workflow authoring](docs/manual-profile-workflow-authoring.md), and [Inventory and export](docs/inventory-and-export.md).
+See [Setup profiles](../docs/setup-profiles.md), [Profile format](../PROFILE_FORMAT.md), [Workflow format](../WORKFLOW_FORMAT.md), [Manual profile and workflow authoring](../docs/manual-profile-workflow-authoring.md), and [Inventory and export](../docs/inventory-and-export.md).
 
 ## Editable YAML configuration
 
@@ -350,26 +349,28 @@ themes.yaml
 
 Every YAML file can be edited inside the TUI or opened in the system's default editor. The manager validates YAML before using it.
 
-See [YAML configuration](docs/configuration.md) and [Model/workflow source YAML](docs/asset-sources.md).
+See [YAML configuration](../docs/configuration.md) and [Model/workflow source YAML](../docs/asset-sources.md).
 
 ## Documentation
 
-- [Documentation home](docs/index.md)
-- [Getting started](docs/getting-started.md)
-- [Textual interface](docs/tui-guide.md)
-- [CLI reference](docs/cli-reference.md)
-- [Shared models and workflows](docs/shared-assets.md)
-- [Model management](docs/models.md)
-- [Workflow management](docs/workflows.md)
-- [Asset source YAML](docs/asset-sources.md)
-- [Setup profiles](docs/setup-profiles.md)
-- [Manual profile and workflow authoring](docs/manual-profile-workflow-authoring.md)
-- [Updates and rollback](docs/updates-and-rollback.md)
-- [PEP 440 versions and ABI compatibility tags](docs/abi-compatibility-tags.md)
-- [Wheels and builds](docs/wheels-and-builds.md)
-- [Architecture](docs/architecture.md)
-- [Function reference](docs/function-reference.md)
-- [Product requirements](PRD.md)
+- [Documentation home](../docs/index.md)
+- [Getting started](../docs/getting-started.md)
+- [Prerequisites and platform preparation](../docs/prerequisites.md)
+- [Textual interface](../docs/tui-guide.md)
+- [CLI reference](../docs/cli-reference.md)
+- [Shared models and workflows](../docs/shared-assets.md)
+- [Model management](../docs/models.md)
+- [Workflow management](../docs/workflows.md)
+- [Asset source YAML](../docs/asset-sources.md)
+- [Setup profiles](../docs/setup-profiles.md)
+- [Badgids Complete profile](../docs/badgids-complete-profile.md)
+- [Manual profile and workflow authoring](../docs/manual-profile-workflow-authoring.md)
+- [Updates and rollback](../docs/updates-and-rollback.md)
+- [PEP 440 versions and ABI compatibility tags](../docs/abi-compatibility-tags.md)
+- [Wheels and builds](../docs/wheels-and-builds.md)
+- [Architecture](../docs/architecture.md)
+- [Function reference](../docs/function-reference.md)
+- [Product requirements](../PRD.md)
 
 ## Testing and development
 
@@ -380,7 +381,7 @@ bash -n install.sh comfyui-setup-manager collect_comfyui_inventory.sh
 
 The project includes `.claude` development instructions and portable skills in `skills/` for Claude Code, Codex, OpenCode, OpenClaude, and compatible agents.
 
-See [Development](docs/development.md), [Testing](docs/testing.md), [Contributing](CONTRIBUTING.md), and [Validation](VALIDATION.md).
+See [Development](../docs/development.md), [Testing](../docs/testing.md), [Contributing](../CONTRIBUTING.md), and [Validation](../VALIDATION.md).
 
 ## Security and privacy
 
@@ -392,10 +393,10 @@ See [Development](docs/development.md), [Testing](docs/testing.md), [Contributin
 - package and repository sources are restricted by the source policy;
 - shared external libraries are not removed when an installation is uninstalled.
 
-Read [SECURITY.md](SECURITY.md).
+Read [SECURITY.md](../SECURITY.md).
 
 ## License
 
 Copyright 2026 Alan Guice (Badgids).
 
-Licensed under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for project attribution.
+Licensed under the [Apache License 2.0](../LICENSE). See [NOTICE](../NOTICE) for project attribution.

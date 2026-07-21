@@ -1,5 +1,12 @@
 # Release notes — 0.8.7
 
+## Prerequisite and Badgids profile documentation
+
+- Added a canonical cross-platform prerequisite guide covering Python/venv/pip, Git, internet/write access, package-manager behavior, source-build compilers, CMake, Ninja, CUDA/ROCm toolkits, Rust, `pkg-config`, and verification commands.
+- Clarified that the Windows bootstrap requires WinGet only when `install.ps1` must install missing Python or Git, and documented App Installer repair plus the manual Python/Git alternative.
+- Added a dedicated Badgids Complete profile guide so its NVIDIA CUDA 13/PyTorch ABI, FFmpeg requirement, conditional build toolchain, optional SoX/Tesseract/Rust tools, included nodes, acceleration packages, and asset policy remain profile-local rather than global manager requirements.
+
+
 ## Theme-aware readable output with plain-text copying
 
 - Runtime follow logs, installation/update/snapshot consoles, task output, node/plugin inventories, workflows, models, LoRAs, skills, MCPs, YAML, JSON, and supported source editors now use semantic syntax roles derived from the active built-in or imported theme.

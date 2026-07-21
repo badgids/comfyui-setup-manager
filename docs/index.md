@@ -6,11 +6,12 @@ This page links every major ComfyUI Setup Manager feature.
 
 ## Start here
 
-1. [Getting started](getting-started.md)
-2. [Shared models and workflows](shared-assets.md)
-3. [Textual interface](tui-guide.md)
-4. [Command-line reference](cli-reference.md)
-5. [Automation and agents](automation-and-agents.md)
+1. [Prerequisites and platform preparation](prerequisites.md)
+2. [Getting started](getting-started.md)
+3. [Shared models and workflows](shared-assets.md)
+4. [Textual interface](tui-guide.md)
+5. [Command-line reference](cli-reference.md)
+6. [Automation and agents](automation-and-agents.md)
 
 ## Manage installations and assets
 
@@ -21,6 +22,7 @@ This page links every major ComfyUI Setup Manager feature.
 - [Workflow library and packs](workflows.md)
 - [Model and workflow source YAML](asset-sources.md)
 - [Setup profiles](setup-profiles.md)
+- [Badgids Complete profile](badgids-complete-profile.md)
 - [Manual profile and workflow authoring](manual-profile-workflow-authoring.md)
 - [PEP 440 versions and ABI compatibility tags](abi-compatibility-tags.md)
 - [Updates and rollback](updates-and-rollback.md)

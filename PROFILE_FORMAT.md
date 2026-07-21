@@ -19,6 +19,8 @@ An exact profile records:
 - sanitized source only for a plugin that remains unresolved after all Registry, Manager, configured-catalog, metadata, and Git lookups;
 - model/workflow manifests, source catalogs, shared-library policy, prerequisites, and validation steps.
 
+Profile-specific operating-system and hardware prerequisites belong in the profile metadata and profile documentation. They must not be promoted to global manager requirements unless every supported profile actually needs them. The bundled example is documented in [Badgids Complete profile](docs/badgids-complete-profile.md).
+
 ## Archive layout
 
 ```text

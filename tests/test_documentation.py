@@ -20,7 +20,8 @@ class DocumentationTests(unittest.TestCase):
 
     def test_local_markdown_links_exist(self) -> None:
         missing: list[str] = []
-        for document in [ROOT / "README.md", ROOT / "PRD.md", *sorted((ROOT / "docs").glob("*.md"))]:
+        documents = [path for path in ROOT.rglob("*.md") if ".venv" not in path.parts]
+        for document in sorted(documents):
             text = document.read_text(encoding="utf-8")
             for match in re.finditer(r"\[[^\]]+\]\(([^)]+)\)", text):
                 target = match.group(1).split("#", 1)[0]
@@ -30,6 +31,24 @@ class DocumentationTests(unittest.TestCase):
                 if not path.exists():
                     missing.append(f"{document.relative_to(ROOT)} -> {target}")
         self.assertEqual(missing, [])
+
+    def test_prerequisites_and_badgids_profile_are_documented(self) -> None:
+        prerequisites = (ROOT / "docs/prerequisites.md").read_text(encoding="utf-8")
+        self.assertIn("When WinGet is required", prerequisites)
+        self.assertIn("Python 3.10 or newer", prerequisites)
+        self.assertIn("venv", prerequisites)
+        self.assertIn("Git", prerequisites)
+        self.assertIn("Source-build prerequisites", prerequisites)
+
+        badgids = (ROOT / "docs/badgids-complete-profile.md").read_text(encoding="utf-8")
+        self.assertIn("Everything here is specific", badgids)
+        self.assertIn("FFmpeg", badgids)
+        self.assertIn("cp313-cuda130-torch2_12_1_cu130", badgids)
+        self.assertIn("Models, workflows, and shared libraries", badgids)
+
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("WinGet is a prerequisite for automatic Windows bootstrapping", readme)
+        self.assertIn("docs/badgids-complete-profile.md", readme)
 
     def test_claude_workspace_is_present(self) -> None:
         required = [
