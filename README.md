@@ -2,7 +2,7 @@
 
 **Author and creator:** [Alan Guice (Badgids)](https://github.com/badgids)  
 **License:** [Apache License 2.0](LICENSE)  
-**Version:** 0.8.7
+**Version:** 0.8.8
 
 ComfyUI Setup Manager is a standalone application for installing, launching, updating, repairing, inspecting, exporting, importing, and sharing ComfyUI installations, models, and workflows.
 
