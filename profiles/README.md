@@ -7,3 +7,8 @@ The export screen and CLI both allow another destination. Files exported here ar
 New exports use a PEP 440 profile version and include their Python, accelerator-runtime, and PyTorch ABI tag in the recorded/displayed profile name. See [PEP 440 versions and ABI compatibility tags](../docs/abi-compatibility-tags.md).
 
 Profiles can be edited from **Profile Library → Edit profile files** or with `profiles files/read-file/edit-file`. See [Manual profile and workflow authoring](../docs/manual-profile-workflow-authoring.md).
+
+
+## Bundled profile documentation
+
+General manager prerequisites are documented in [Prerequisites and platform preparation](../docs/prerequisites.md). Requirements specific to the bundled Badgids exact profile—including its NVIDIA/CUDA ABI, FFmpeg, source-build toolchain, included nodes, acceleration packages, and model/workflow policy—are kept in [Badgids Complete profile](../docs/badgids-complete-profile.md).

@@ -1,6 +1,6 @@
 # Getting started
 
-[Documentation home](index.md) · [README](../README.md) · [Troubleshooting](troubleshooting.md)
+[Documentation home](index.md) · [Prerequisites](prerequisites.md) · [README](../README.md) · [Troubleshooting](troubleshooting.md)
 
 ## What this program does
 
@@ -10,11 +10,13 @@ The manager itself also has a private environment under `installer/.venv`. This 
 
 ## Prerequisites
 
-The first-run scripts check for Python 3.10 or newer and Git. When possible, they install missing prerequisites with the system package manager.
+Read [Prerequisites and platform preparation](prerequisites.md) before the first run.
 
-Source builds may also need a compiler, CMake, Ninja, and the matching accelerator development toolkit.
+The manager needs Python 3.10+ with `venv`/`pip`, Git, internet access for public downloads, and writable install/library directories. On Windows, `install.ps1` uses WinGet only when it must install missing Python or Git. Run `winget --version` first, or manually install Python and Git before starting.
 
-Check without changing anything:
+Source builds add compiler, CMake, Ninja, Python-header, and accelerator-toolkit requirements. Individual setup profiles may add tools such as FFmpeg; those requirements belong to the selected profile. See [Badgids Complete profile](badgids-complete-profile.md) for the bundled custom profile.
+
+After the manager has been installed, check without changing anything:
 
 ```bash
 ./comfyui-setup-manager system check
@@ -26,13 +28,7 @@ Include source-build tools:
 ./comfyui-setup-manager system check --source-builds
 ```
 
-Install missing prerequisites:
-
-```bash
-./comfyui-setup-manager system install-prerequisites --source-builds --yes
-```
-
-Use `--dry-run` first to display the commands:
+Use a dry run before approving package-manager changes:
 
 ```bash
 ./comfyui-setup-manager --format yaml system install-prerequisites --source-builds --dry-run
@@ -48,6 +44,14 @@ chmod +x install.sh comfyui-setup-manager
 ```
 
 ### Windows PowerShell
+
+Confirm WinGet when Python or Git may be missing:
+
+```powershell
+winget --version
+```
+
+Then run:
 
 ```powershell
 Set-ExecutionPolicy -Scope Process Bypass

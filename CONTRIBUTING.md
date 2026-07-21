@@ -7,6 +7,7 @@ Thank you for improving ComfyUI Setup Manager.
 Read:
 
 - [PRD](PRD.md)
+- [Prerequisites and platform preparation](docs/prerequisites.md)
 - [Architecture](docs/architecture.md)
 - [Development guide](docs/development.md)
 - [Testing guide](docs/testing.md)

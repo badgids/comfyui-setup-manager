@@ -1,6 +1,12 @@
 # Development guide
 
-[Documentation home](index.md) · [Testing](testing.md) · [PRD](../PRD.md)
+[Documentation home](index.md) · [Prerequisites](prerequisites.md) · [Testing](testing.md) · [PRD](../PRD.md)
+
+## Development prerequisites
+
+Contributors need the [general manager prerequisites](prerequisites.md), plus Python virtual-environment support and the test dependencies installed below. Git is required by repository/export/update tests. Native-build tests or profile work additionally require the matching compiler/CMake/Ninja/accelerator toolchain; they are not required for ordinary unit-test development.
+
+On Windows, WinGet is needed only when the bootstrap must install missing Python or Git. A developer who already has compatible Python and Git can work without WinGet.
 
 ## Local environment
 

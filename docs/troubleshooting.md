@@ -1,6 +1,6 @@
 # Troubleshooting
 
-[Documentation home](index.md) · [Getting started](getting-started.md)
+[Documentation home](index.md) · [Prerequisites](prerequisites.md) · [Getting started](getting-started.md)
 
 ## The manager will not start
 
@@ -17,6 +17,36 @@ Then check:
 ```
 
 If the private manager environment is damaged, remove only `installer/.venv` and rerun `install.sh`.
+
+
+## Windows says WinGet is required
+
+The Windows bootstrap uses WinGet only to install missing Python or Git. Check:
+
+```powershell
+winget --version
+py -3 --version
+git --version
+```
+
+When `winget` is missing, install or repair Microsoft's App Installer, then close and reopen the terminal. Alternatively, manually install Python 3.10+ and Git; once both are available on `PATH`, `install.ps1` no longer needs WinGet for the manager bootstrap.
+
+Windows Sandbox and some Store-disabled or older Server environments do not include a ready-to-use WinGet client. Follow Microsoft's standalone/repair instructions linked from [Prerequisites and platform preparation](prerequisites.md).
+
+## Python exists but the private environment cannot be created
+
+The selected Python must include `venv` and `pip` support. Verify:
+
+```bash
+python3 -m venv --help
+python3 -m ensurepip --version
+```
+
+On Debian/Ubuntu and WSL distributions, install `python3-venv` and `python3-pip`. On Windows, repair or reinstall the full Python distribution rather than relying on the Microsoft Store execution alias.
+
+## Automatic prerequisite installation cannot elevate
+
+Linux/WSL package installation normally needs `sudo` or a root shell. If the manager reports no supported package manager or cannot elevate, install the displayed packages manually, then rerun the check. Corporate package repositories, stale distribution sources, proxies, and TLS inspection can also prevent package installation.
 
 ## A ComfyUI installation is not detected
 
@@ -108,7 +138,7 @@ Open the Models or Workflows task screen, read the error, then retry. Check the 
 
 The installer now installs `manager_requirements.txt`, re-applies profile constraints after node and acceleration packages, audits transitive dependencies, and runs ComfyUI's quick custom-node validation. An installation is not reported successful while selected nodes still show import failures.
 
-For an older Badgids installation created before v0.8.5, re-run the profile so the NumPy compatibility pin and `click` repair are applied. Review the installation console or search logs for `IMPORT FAILED`, `No module named`, or `Numba needs NumPy`.
+For an older Badgids installation created before v0.8.5, re-run the profile so the NumPy compatibility pin and `click` repair are applied. Read [Badgids Complete profile](badgids-complete-profile.md) for its FFmpeg, NVIDIA/CUDA, and conditional source-build requirements. Review the installation console or search logs for `IMPORT FAILED`, `No module named`, or `Numba needs NumPy`.
 
 ## The TUI stops responding after an installation error
 

@@ -6,6 +6,13 @@ A `.comfyuisetup` file is a portable reconstruction manifest. It records the Com
 
 Every new export also records a normalized PEP 440 version and a combined ABI tag. Exact profiles include the source Python version/ABI, CUDA/ROCm/CPU/MPS runtime, and full PyTorch build version; these values appear in the profile name, selector, Profile Library, archive metadata, and installation report. Read [PEP 440 versions and ABI compatibility tags](abi-compatibility-tags.md) before moving a compiled profile between machines.
 
+## Included profiles
+
+- **Vanilla ComfyUI** provides the general starting point and uses the manager prerequisites documented in [Prerequisites and platform preparation](prerequisites.md), plus any dependencies shown by its installation review.
+- **Badgids Complete ComfyUI** is an exact NVIDIA/CUDA profile with additional video, audio, 3D, and native-build dependencies. Its requirements are intentionally isolated in [Badgids Complete profile](badgids-complete-profile.md) instead of being added to the manager's global prerequisite list.
+
+Always review a profile's compatibility tag, system dependencies, selected nodes, and acceleration packages before installation. A profile requirement is not automatically a requirement for the manager or for another profile.
+
 ## What exact export records
 
 The default export mode is exact. It records:

@@ -42,30 +42,29 @@ Every important TUI action has a CLI command. CLI output can be text, JSON, or Y
 
 ## Requirements
 
-The install scripts check for missing prerequisites and install them when the operating system has a supported package manager.
+The manager itself requires Python 3.10+, Git, internet access for public downloads, and write access to the selected project/install/library directories.
 
-### Required
+### Windows and WinGet
 
-| Requirement | Minimum | Purpose |
-|---|---:|---|
-| Python | 3.10 | Runs the manager and creates managed environments |
-| Git | Supported current release | Downloads and updates ComfyUI and public custom nodes |
-| Internet access | When downloading | Gets public packages, repositories, models, workflows, and wheels |
+The Windows bootstrap checks for Python and Git. If either is missing, `install.ps1` installs it with **WinGet**, so WinGet is a prerequisite for automatic Windows bootstrapping on an otherwise unprepared system. WinGet is not required when compatible Python and Git are already installed and visible in the terminal.
 
-### Required only for source builds
+Check before installing:
 
-| Requirement | Purpose |
-|---|---|
-| C/C++ compiler | Builds native Python extensions |
-| CMake and Ninja | Configure and build native projects |
-| CUDA toolkit | Builds NVIDIA extensions when no matching wheel exists |
-| ROCm development tools | Builds supported AMD extensions |
-| Visual Studio Build Tools | Native builds on Windows |
-| Xcode Command Line Tools | Native builds on macOS |
+```powershell
+winget --version
+python --version
+git --version
+```
 
-The bootstrap understands common package managers such as `apt-get`, `dnf`, `pacman`, Homebrew, and Windows `winget`. Unsupported systems receive exact instructions instead of hidden changes.
+WinGet is supplied by Microsoft's App Installer. The bootstrap cannot install WinGet itself; install/repair App Installer first, or manually install Python 3.10+ and Git. No global `uv` installation is needed.
 
-See [Getting started](docs/getting-started.md) and [Wheels and source builds](docs/wheels-and-builds.md).
+### Optional source-build tools
+
+Native source fallbacks may require a C/C++ compiler, CMake, Ninja, Python development headers, and a matching CUDA or ROCm development toolkit. Some packages also require Rust or `pkg-config`. These are not needed when compatible wheels are available.
+
+Setup profiles can add their own system dependencies. Keep those requirements with the profile rather than treating them as global manager prerequisites. The bundled Badgids profile is documented separately.
+
+Read the complete [Prerequisites and platform preparation](docs/prerequisites.md) guide and the [Badgids Complete profile](docs/badgids-complete-profile.md) guide before installation.
 
 ## Install the manager
 
@@ -356,6 +355,7 @@ See [YAML configuration](docs/configuration.md) and [Model/workflow source YAML]
 
 - [Documentation home](docs/index.md)
 - [Getting started](docs/getting-started.md)
+- [Prerequisites and platform preparation](docs/prerequisites.md)
 - [Textual interface](docs/tui-guide.md)
 - [CLI reference](docs/cli-reference.md)
 - [Shared models and workflows](docs/shared-assets.md)
@@ -363,6 +363,7 @@ See [YAML configuration](docs/configuration.md) and [Model/workflow source YAML]
 - [Workflow management](docs/workflows.md)
 - [Asset source YAML](docs/asset-sources.md)
 - [Setup profiles](docs/setup-profiles.md)
+- [Badgids Complete profile](docs/badgids-complete-profile.md)
 - [Manual profile and workflow authoring](docs/manual-profile-workflow-authoring.md)
 - [Updates and rollback](docs/updates-and-rollback.md)
 - [PEP 440 versions and ABI compatibility tags](docs/abi-compatibility-tags.md)
