@@ -1,0 +1,16 @@
+schema_version: 4
+id: default
+name: Default Profile
+display_name: Default Profile
+version: 0.0.1
+kind: comfyui-setup-profile
+comfyui:
+  repository: https://github.com/comfyanonymous/ComfyUI.git
+  branch: master
+python:
+  preferred: 3.12
+torch:
+  version: 2.6.0
+nodes: []
+models: []
+workflows: []
